@@ -681,8 +681,8 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
     </tr>
     <tr>
       <td>NumEntries</td>
-      <td>12 bits</td>
-      <td colspan="2">Number of RangeEntry sections to follow</td>
+      <td>Fibonacci</td>
+      <td colspan="2">Number of RangeEntry sections to follow (offset by 1)</td>
     </tr>
     <tr style="border-top:5px solid black;">
       <td colspan="2">RangeEntry (repeated NumEntries times)</td>
@@ -706,26 +706,21 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       </td>
     </tr>
     <tr>
-      <td>StartOrOnlyVendorId</td>
-      <td>16 bits</td>
+      <td>Offset</td>
+      <td>Fibonacci</td>
       <td>
-        The first ID of an inclusive contiguous ascending-order series of
-        Vendor IDs even if the series is only a cardinality of 1.
+        First offset starts from <code>0</code>
       </td>
       <td>
-        This is the first or only Vendor ID with consent in this RangeEntry.
+        The offset from the end of the last offsets.
       </td>
     </tr>
     <tr>
-      <td>EndVendorId</td>
-      <td>16 bits</td>
+      <td>Length</td>
+      <td>Fibonacci</td>
+      <td></td>
       <td>
-        The last ID of the inclusive contiguous ascending-order series of
-        Vendor IDs started with StartOrOnlyVendorId but only if that series
-        has a cardinality greater than 1, otherwise this field is omitted.
-      </td>
-      <td>
-        The end of the series of Vendor IDs – this is omitted if
+        The length of the offset – this is omitted if
         <code>IsARange=0</code>.
       </td>
     </tr>
@@ -814,7 +809,7 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
     </tr>
     <tr>
       <td>NumEntries</td>
-      <td>12 bits</td>
+      <td>Fibonacci</td>
       <td colspan="2">Number of RangeEntry sections to follow</td>
     </tr>
     <tr style="border-top:5px solid black;">
@@ -840,28 +835,21 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       </td>
     </tr>
     <tr>
-      <td>StartOrOnlyVendorId</td>
-      <td>16 bits</td>
+      <td>Offset</td>
+      <td>Fibonacci</td>
       <td>
-        The first ID of an inclusive contiguous ascending-order series of
-        Vendor IDs even if the series is only a cardinality of 1.
+        First offset starts from <code>0</code>
       </td>
       <td>
-        This is the first or only Vendor ID with legitimate interest
-        disclosures established in this RangeEntry.
+        The offset from the end of the last offsets.
       </td>
     </tr>
     <tr>
-      <td>EndVendorId</td>
-      <td>16 bits</td>
+      <td>Length</td>
+      <td>Fibonacci</td>
+      <td></td>
       <td>
-        The last ID of the inclusive contiguous ascending-order series of
-        Vendor IDs started with StartOrOnlyVendorId but only if that series
-        has a cardinality greater than <code>1</code>, otherwise this field
-        is omitted.
-      </td>
-      <td>
-        The end of the series of Vendor IDs – this is omitted if
+        The length of the offset – this is omitted if
         <code>IsARange=0</code>.
       </td>
     </tr>
@@ -966,8 +954,8 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
     </tr>
     <tr style="border-top:2px solid black;">
       <td>NumEntries</td>
-      <td>12 bits</td>
-      <td colspan="2">Number of RangeEntry sections to follow.</td>
+      <td>Fibonacci</td>
+      <td colspan="2">Number of RangeEntry sections to follow (offset by 1).</td>
     </tr>
     <tr style="border-top:5px double black;">
       <td colspan="2">RangeEntry (repeated NumEntries times)</td>
@@ -992,29 +980,21 @@ CLcVDxRMWfGmWAVAHCENAXCkAKDAADnAABRgA5mdfCKZuYJez-NQm0TBMYA4oCAAGQYIAAAAAAEAIAEg
       </td>
     </tr>
     <tr>
+      <td>Offset</td>
+      <td>Fibonacci</td>
       <td>
-        StartOrOnlyVendorId
-      </td>
-      <td>16 bits</td>
-      <td>
-        The first ID of an inclusive contiguous ascending-order series of
-        Vendor IDs even if the series is only a cardinality of 1.
+        First offset starts from <code>0</code>
       </td>
       <td>
-        This is the first or only Vendor ID with this restriction in this
-        RangeEntry
+        The offset from the end of the last offsets.
       </td>
     </tr>
     <tr>
-      <td>EndVendorId</td>
-      <td>16 bits</td>
+      <td>Length</td>
+      <td>Fibonacci</td>
+      <td></td>
       <td>
-        The last ID of the inclusive contiguous ascending-order series of
-        Vendor IDs started with StartOrOnlyVendorId but only if that series
-        has a cardinality greater than 1, otherwise this field is omitted. Note that <em>contiguous</em> above permits encoding ranges that include deleted Vendors or cover gaps in GVL vendor IDs unlike other range encodings in this specification. For example, to encode a restriction for vendors [12, 15, 18, 24] if vendor IDs 13-14, 16-17, and 19-22 are not in the GVL and 23 is in the GVL but has a non-empty <code>deletedDate</code>, a range entry of 12-24 is permitted.
-      </td>
-      <td>
-        The end of the series of Vendor IDs – this is omitted if
+        The length of the offset – this is omitted if
         <code>IsARange=0</code>.
       </td>
     </tr>
@@ -1124,7 +1104,7 @@ The _**DisclosedVendors**_ is an optional TC String segment that records which v
     </tr>
     <tr>
       <td>NumEntries</td>
-      <td>12 bits</td>
+      <td>Fibonacci</td>
       <td colspan="2">Number of RangeEntry sections to follow</td>
     </tr>
     <tr style="border-top:5px solid black;">
@@ -1149,27 +1129,21 @@ The _**DisclosedVendors**_ is an optional TC String segment that records which v
       </td>
     </tr>
     <tr>
-      <td>StartOrOnlyVendorId</td>
-      <td>16 bits</td>
+      <td>Offset</td>
+      <td>Fibonacci</td>
       <td>
-        The first ID of an inclusive contiguous ascending-order series of
-        Vendor IDs even if the series is only a cardinality of 1.
+        First offset starts from <code>0</code>
       </td>
       <td>
-        This is the first or only Vendor ID that has been disclosed in this
-        RangeEntry.
+        The offset from the end of the last offsets.
       </td>
     </tr>
     <tr>
-      <td>EndVendorId</td>
-      <td>16 bits</td>
+      <td>Length</td>
+      <td>Fibonacci</td>
+      <td></td>
       <td>
-        The last ID of the inclusive contiguous ascending-order series of
-        Vendor IDs started with StartOrOnlyVendorId but only if that series
-        has a cardinality greater than 1, otherwise this field is omitted.
-      </td>
-      <td>
-        The end of the series of Vendor IDs – this is omitted if
+        The length of the offset – this is omitted if
         <code>IsARange=0</code>.
       </td>
     </tr>
